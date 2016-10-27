@@ -64,6 +64,17 @@ local function __tostring(self, table_list, level)
 	return result
 end
 
-function table.tostring(self)
-	return tostring(self) .. " = {\n" .. __tostring(self) .. "}"
+function table.dump(self)
+	assert(type(self) == "table")
+	print(tostring(self) .. " = {\n" .. __tostring(self) .. "}")
+end
+
+function table.readonly(t, name)
+	return setmetatable({}, {
+		__newindex = function()
+			error(string.format("<%s:%s> is readonly table", name or "table", tostring(t)))
+		end,
+		__index = t,
+		__pairs = function() return pairs(t) end,
+	})
 end
