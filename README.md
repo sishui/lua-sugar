@@ -1,1 +1,1 @@
-# lualibs
+# lua-sugar
