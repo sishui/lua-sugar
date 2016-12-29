@@ -18,18 +18,14 @@ local function stack2string()
 		while true do
 			local name, value = debug.getlocal(i, index)
 			if name == nil then break end
-			local text
-			if type(value) == 'string' then
-				text = value
-			elseif type(value) == "number" then
-				text = string.format("%.2f", value)
-			else
-				text = tostring(value)
-			end
-			if text ~= nil then
-				texts[#texts+1] = string.format( "[%s] = %s", name, text )
-			end
 			index = index + 1
+			if type(value) == 'string' then
+				texts[index] = string.format( "[%s] = %s", name, value )
+			elseif type(value) == "number" then
+				texts[index] = string.format( "[%s] = %.2f", name, value )
+			else
+				texts[index] = string.format( "[%s] = %s", name, tostring(value) )
+			end
 		end
 	end
 	return table.concat(texts, '\r\n')

@@ -10,7 +10,7 @@ local assert = assert
 -- "QNX"     = "qnx"
 
 if not os.PLATFORM then
-	local ext = package.cpath:match("%p[\\|/]?%p(%a+)")
+	local ext = string.match(package.cpath, "%p[\\|/]?%p(%a+)")
 	if "dll" == ext then
 		os.PLATFORM = "windows"
 	elseif "so" == ext then

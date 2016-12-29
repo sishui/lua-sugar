@@ -9,5 +9,6 @@ return function(f, title)
 	print(string.format("%s%s        begin        %s", sp, title or "", sp))
 	local begin = os.clock()
 	f()
-	print(string.format("%s%s end cost: %f %s", sp, title or "", os.clock() - begin, sp))
+	local complete = os.clock() - begin
+	print(string.format("%s%s end cost: %f %s", sp, title or "", complete, sp))
 end
