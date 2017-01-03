@@ -2,6 +2,8 @@
 local table        = table
 local setmetatable = setmetatable
 local getmetatable = getmetatable
+local pairs        = pairs
+local error        = error
 
 function table.clone(object)
 	local lookup_table = {}
@@ -59,9 +61,17 @@ local function __tostring(self, table_list, level)
 		else
 			result = result .. indent .. "__metatable = {\n" .. __tostring(mt, table_list, level+1) .. indent .. "}\n"
 		end
-		 
 	end
 	return result
+end
+
+function table.count(self)
+	assert(type(self) == "table")
+	local index = 0
+	for k,v in pairs(self) do
+		index = index + 1
+	end
+	return index
 end
 
 function table.dump(self)
@@ -69,12 +79,12 @@ function table.dump(self)
 	print(tostring(self) .. " = {\n" .. __tostring(self) .. "}")
 end
 
-function table.readonly(t, name)
+function table.readonly(self, name)
 	return setmetatable({}, {
 		__newindex = function()
-			error(string.format("<%s:%s> is readonly table", name or "table", tostring(t)))
+			error(string.format("<%s:%s> is readonly table", name or "table", tostring(self)))
 		end,
-		__index = t,
+		__index = self,
 		__pairs = function() return pairs(t) end,
 	})
 end
