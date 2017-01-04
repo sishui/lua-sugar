@@ -35,7 +35,7 @@ local function __tostring(self, table_list, level)
 		local value_string = tostring(v)
 		local value_type = type(v)
 		result = result .. indent .. "[" .. quo .. key_string .. quo .. "] = "
- 
+
 		if value_type == "table" then
 			local mt = getmetatable(v)
 			local name = table_list[v]
@@ -51,7 +51,7 @@ local function __tostring(self, table_list, level)
 			result = result .. value_string .. "\n"
 		end
 	end
- 
+
 	local mt = getmetatable(self)
 	if mt then
 		result = result .. "\n"

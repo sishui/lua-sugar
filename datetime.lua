@@ -11,7 +11,7 @@ mt.__index = mt
 function mt.timezone()
 	if not mt._timezone then
 		local now = os.time()
-		mt._timezone =  os.difftime(now, os.time(os.date("!*t", now))) / 3600
+		mt._timezone = os.difftime(now, os.time(os.date("!*t", now))) / 3600
 	end
 	return mt._timezone
 end

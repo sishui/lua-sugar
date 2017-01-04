@@ -20,7 +20,7 @@ local P = {
 
 
 local M = {
-	__metatable = "read only table", 
+	__metatable = "read only table",
 	__index = P,
 	__pairs = function() return pairs(P) end,
 	__newindex = function (t,k,v)
